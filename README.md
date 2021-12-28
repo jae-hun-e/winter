@@ -10,7 +10,7 @@
 <h4>ex) 여러명이 같은 장소에서 만나기로 약속했을때
 </h4>
 
-<hr/>
+<h2>Technology stack</h2>
 - React JS
 - styled-component
 - FireBase
