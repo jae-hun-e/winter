@@ -14,8 +14,8 @@ const firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
-export const firebaseInstance = firebase;
+export const firebaseInstance = firebase; //firebase 초기화 셋팅
 
-export const authService = firebase.auth();
+export const authService = firebase.auth(); // 인증정보
 
-export const dbService = firebase.firestore();
+export const dbService = firebase.firestore(); //firebase DB 컬랙션 집합

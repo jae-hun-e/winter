@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { dbService } from "fbase";
+import Nweet from "components/Nweet";
 
 const Home = ({ userObj }) => {
   const [nweet, setNweet] = useState("");
   const [nweets, setNweets] = useState([]);
+
   // create
   const onSubmit = async (event) => {
     event.preventDefault();
@@ -28,8 +30,9 @@ const Home = ({ userObj }) => {
 
   // 실시간 read
   useEffect(() => {
-    dbService.collection("nweets").onSnapshot((snapshot) => {
-      const newArray = snapshot.docs.map((document) => ({
+    dbService.collection("nweets").onSnapshot(async (snapshot) => {
+      //async-await는 여기서는 안 써도 가능
+      const newArray = await snapshot.docs.map((document) => ({
         // snapshot.docs로 문서 스냅샷만 얻오옴, foreach는 매순간 반환하지만 map은 순회후 반환이라 성능 개선됨
         id: document.id,
         ...document.data(),
@@ -62,9 +65,11 @@ const Home = ({ userObj }) => {
       </form>
       <div>
         {nweets.map((nweet) => (
-          <div key={nweet.id}>
-            <h4>{nweet.text}</h4>
-          </div>
+          <Nweet
+            key={nweet.id}
+            nweetObj={nweet}
+            isOwner={nweet.creatorId === userObj.uid}
+          /> //글정보(객체)넘겨주고 ,글쓴이 Id와 로그인 정보비교
         ))}
       </div>
     </>
