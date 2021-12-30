@@ -10,9 +10,9 @@ const Nweet = ({ nweetObj, isOwner }) => {
     const ok = window.confirm("삭제하시겠습니까?");
     console.log(ok);
     if (ok) {
-      console.log(nweetObj.id);
-      const data = await dbService.doc(`nweets/${nweetObj.id}`).delete(); // 경로를 타고 들어가 문서정보를 가져와서 지움
-      console.log(data);
+      // console.log(nweetObj.id);
+      await dbService.doc(`nweets/${nweetObj.id}`).delete(); // 경로를 타고 들어가 문서정보를 가져와서 지움
+      // console.log(data);
     }
   };
 
@@ -26,7 +26,7 @@ const Nweet = ({ nweetObj, isOwner }) => {
   };
   const onSubmit = async (event) => {
     event.preventDefault();
-    console.log(nweetObj.id, newNweet);
+    // console.log(nweetObj.id, newNweet);
     await dbService.doc(`nweets/${nweetObj.id}`).update({ text: newNweet });
     setEditing(false);
   };
