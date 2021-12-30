@@ -1,20 +1,33 @@
 import React, { useEffect, useState } from "react";
-import { dbService } from "fbase";
+import { dbService, storageService } from "fbase";
 import Nweet from "components/Nweet";
+import { v4 as uuidv4 } from "uuid";
 
 const Home = ({ userObj }) => {
   const [nweet, setNweet] = useState(""); // 추가 트윗
   const [nweets, setNweets] = useState([]); // 트윗 리스트
-  const [attachment, setAttachment] = useState("");
+  const [attachment, setAttachment] = useState(""); // 사진url
 
   // create
   const onSubmit = async (event) => {
     event.preventDefault();
+
+    let attachmentUrl = "";
+    if (attachment !== "") {
+      // storage의 사진url받아오기
+      const attachmentRef = storageService
+        .ref()
+        .child(`${userObj.uid}/${uuidv4()}`);
+      const response = await attachmentRef.putString(attachment, "data_url");
+      attachmentUrl = await response.ref.getDownloadURL(); //firebase storage안의 사진url 반환
+    }
+
+    // nweetObj 생성
     await dbService.collection("nweets").add({
-      // nweet 생성
       text: nweet,
       createAt: Date.now(),
       creatorId: userObj.uid,
+      attachmentUrl,
     });
     setNweet(""); // 초기화
   };
@@ -73,6 +86,8 @@ const Home = ({ userObj }) => {
     reader.readAsDataURL(theFile);
   };
 
+  const onClearAttachment = () => setAttachment("");
+
   return (
     <>
       <form onSubmit={onSubmit}>
@@ -86,7 +101,10 @@ const Home = ({ userObj }) => {
         <input type="file" accept="image/*" onChange={onFileChange} />
         <input type="submit" value="nweet" />
         {attachment && (
-          <img src={attachment} alt="" width="50px" height="50px" />
+          <div>
+            <img src={attachment} alt="" width="50px" height="50px" />
+            <button onClick={onClearAttachment}>Clear</button>
+          </div>
         )}
       </form>
       <div>
