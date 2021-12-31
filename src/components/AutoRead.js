@@ -9,7 +9,7 @@ const AutoRead = ({ userObj }) => {
   useEffect(() => {
     dbService
       .collection("winter")
-      .orderBy("createAt", "desc")
+      .orderBy("createdAt", "desc")
       .onSnapshot(async (snapshot) => {
         //async-await는 여기서는 안 써도 가능
         // foreach는 매순간 반환하지만 map은 순회후 반환이라 성능 개선됨
@@ -24,9 +24,8 @@ const AutoRead = ({ userObj }) => {
   }, []);
   // console["log"]("winters", winters);
 
-  // todo 트윗 오름차순 정렬 필요
   return (
-    <div>
+    <div style={{ marginTop: 30 }}>
       {winters.map((winter) => (
         <Winter
           key={winter.id}

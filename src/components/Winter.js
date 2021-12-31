@@ -8,7 +8,7 @@ const Winter = ({ winterObj, isOwner }) => {
   const toggleEditing = () => setEditing((prev) => !prev);
 
   return (
-    <div>
+    <div className="nweet">
       {editing ? ( // edit input
         <WinterEditing
           winterObj={winterObj}
@@ -30,10 +30,7 @@ const Winter = ({ winterObj, isOwner }) => {
             )}
           </div>
           {isOwner && (
-            <>
-              <WinterDelete winterObj={winterObj} />
-              <button onClick={toggleEditing}>Edit winter</button>
-            </>
+            <WinterDelete winterObj={winterObj} toggleEditing={toggleEditing} />
           )}
         </>
       )}

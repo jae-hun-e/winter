@@ -26,17 +26,11 @@ const AuthForm = () => {
     event.preventDefault();
     try {
       if (newAccount) {
-        const data = await authService.createUserWithEmailAndPassword(
-          email,
-          password
-        );
-        console.log(data);
+        await authService.createUserWithEmailAndPassword(email, password);
+        // console.log(data);
       } else {
-        const data = await authService.signInWithEmailAndPassword(
-          email,
-          password
-        );
-        console.log(data);
+        await authService.signInWithEmailAndPassword(email, password);
+        // console.log(data);
       }
     } catch (error) {
       setError(error.message);
@@ -48,13 +42,14 @@ const AuthForm = () => {
   // todo 회원가입시 user.displayName이랑 image기입하도록
   return (
     <>
-      <form onSubmit={onSubmit}>
+      <form onSubmit={onSubmit} className="container">
         <input
           type="email"
           placeholder="Email"
           required
           value={email}
           onChange={onChange}
+          className="authInput"
         />
         <input
           type="password"
@@ -63,13 +58,18 @@ const AuthForm = () => {
           value={password}
           onChange={onChange}
           autoComplete="off"
+          className="authInput"
         />
-        <input type="submit" value={newAccount ? "회원가입" : "로그인"} />
-        <span onClick={toggleAccount}>
-          {newAccount ? "로그인으로 변경" : "회원가입으로 변경"}
-        </span>
+        <input
+          type="submit"
+          value={newAccount ? "Create Account" : "Log In"}
+          className="authInput authSubmit"
+        />
+        {error && <span className="authError">{error}</span>}
       </form>
-      <div>{error}</div>
+      <span onClick={toggleAccount} className="authSwitch">
+        {newAccount ? "Sign In" : "Create Account"}
+      </span>
     </>
   );
 };

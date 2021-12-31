@@ -22,11 +22,20 @@ const WinterEditing = ({ winterObj, setEditing, toggleEditing }) => {
 
   return (
     <>
-      <form onSubmit={onSubmit}>
-        <input value={newWinter} onChange={onChange} required />
-        <input type="submit" value="updata winter" />
+      <form onSubmit={onSubmit} className="container nweetEdit">
+        <input
+          value={newWinter}
+          onChange={onChange}
+          required
+          placeholder="Edit your nweet"
+          autoFocus
+          className="formInput"
+        />
+        <input type="submit" value="updata winter" className="formBtn" />
       </form>
-      <button onClick={toggleEditing}>Cancel</button>
+      <button onClick={toggleEditing} className="formBtn cancelBtn">
+        Cancel
+      </button>
     </>
   );
 };

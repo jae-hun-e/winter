@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { dbService, storageService } from "fbase";
 import { v4 as uuidv4 } from "uuid";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus, faTimes } from "@fortawesome/free-solid-svg-icons";
 
 const NwinterCreate = ({ userObj }) => {
   const [winter, setWinter] = useState(""); // 추가 트윗
@@ -62,20 +64,44 @@ const NwinterCreate = ({ userObj }) => {
 
   const onClearAttachment = () => setAttachment("");
   return (
-    <form onSubmit={onSubmit}>
+    <form onSubmit={onSubmit} className="factoryForm">
+      <div className="factoryInput__container">
+        <input
+          value={winter}
+          onChange={onChange}
+          type="text"
+          placeholder="뭐하는 중?"
+          maxLength={120}
+          className="factoryInput__input"
+        />
+        <input type="submit" value="&rarr;" className="factoryInput__arrow" />
+      </div>
+      <label for="attach-file" className="factoryInput__label">
+        <span>Add photos</span>
+        <FontAwesomeIcon icon={faPlus} />
+      </label>
       <input
-        value={winter}
-        onChange={onChange}
-        type="text"
-        placeholder="뭐하는 중?"
-        maxLength={120}
+        id="attach-file"
+        type="file"
+        accept="image/*"
+        onChange={onFileChange}
+        style={{
+          opacity: 0,
+        }}
       />
-      <input type="file" accept="image/*" onChange={onFileChange} />
-      <input type="submit" value="winter" />
       {attachment && (
-        <div>
-          <img src={attachment} alt="" width="50px" height="50px" />
-          <button onClick={onClearAttachment}>Clear</button>
+        <div className="factoryForm__attachment">
+          <img
+            src={attachment}
+            alt=""
+            style={{
+              backgroundImage: attachment,
+            }}
+          />
+          <button onClick={onClearAttachment} className="factoryForm__clear">
+            <span>Remove</span>
+            <FontAwesomeIcon icon={faTimes} />
+          </button>
         </div>
       )}
     </form>

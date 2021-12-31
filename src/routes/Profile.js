@@ -31,14 +31,17 @@ const Profile = ({ refreshUser, userObj }) => {
   }, []);
 
   return (
-    <>
+    <div className="container">
       <UserInfoEditing userObj={userObj} refreshUser={refreshUser} />
-      <button onClick={onLogOutClick}>Log Out</button>
+      <span onClick={onLogOutClick} className="formBtn cancelBtn logOut">
+        Log Out
+      </span>
+      <span className="logOut">내 글 목록</span>
       {myWinters &&
         myWinters.map((winter, idx) => (
           <Winter key={idx} winterObj={winter.data()} isOwner={true} />
         ))}
-    </>
+    </div>
   );
 };
 

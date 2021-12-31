@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 const UserInfoEditing = ({ userObj, refreshUser }) => {
-  const [newDisplay, setNewDisplay] = useState(userObj.displayName); // 변경할 이름
+  const [newDisplay, setNewDisplay] = useState(); // 변경할 이름
 
   // 입력값 변경
   const onChange = (event) => {
@@ -21,14 +21,23 @@ const UserInfoEditing = ({ userObj, refreshUser }) => {
   };
 
   return (
-    <form onSubmit={onSubmit}>
+    <form onSubmit={onSubmit} className="profileForm">
       <input
         type="text"
-        placeholder="Display name"
+        placeholder="Display Change name"
         onChange={onChange}
         value={newDisplay}
+        autoFocus
+        className="formInput"
       />
-      <input type="submit" placeholder="Update Profile" />
+      <input
+        type="submit"
+        placeholder="이름 변경"
+        className="formBtn"
+        style={{
+          marginTop: 15,
+        }}
+      />
     </form>
   );
 };

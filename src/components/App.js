@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import AppRouter from "components/Router";
 import { authService } from "fbase";
 import Footer from "./Footer";
+import styled from "styled-components";
 
 function App() {
   const [init, setInit] = useState(false);
@@ -37,7 +38,7 @@ function App() {
   };
 
   return (
-    <>
+    <Container>
       {init ? (
         <AppRouter
           refreshUser={refreshUser}
@@ -45,11 +46,18 @@ function App() {
           userObj={userObj}
         />
       ) : (
-        "로딩 중..."
+        <span></span>
       )}
       <Footer />
-    </>
+    </Container>
   );
 }
 
 export default App;
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;

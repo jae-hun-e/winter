@@ -1,7 +1,9 @@
 import React from "react";
 import { dbService, storageService } from "fbase";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash, faPencilAlt } from "@fortawesome/free-solid-svg-icons";
 
-const WinterDelete = ({ winterObj }) => {
+const WinterDelete = ({ winterObj, toggleEditing }) => {
   // delete
   const onDeleteClick = async () => {
     const ok = window.confirm("삭제하시겠습니까?");
@@ -11,7 +13,16 @@ const WinterDelete = ({ winterObj }) => {
         await storageService.refFromURL(winterObj.attachmentUrl).delete();
     }
   };
-  return <button onClick={onDeleteClick}>Delete winter</button>;
+  return (
+    <div className="nweet__actions">
+      <span onClick={onDeleteClick}>
+        <FontAwesomeIcon icon={faTrash} />
+      </span>
+      <span onClick={toggleEditing}>
+        <FontAwesomeIcon icon={faPencilAlt} />
+      </span>
+    </div>
+  );
 };
 
 export default WinterDelete;
