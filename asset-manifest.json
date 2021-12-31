@@ -1,10 +1,13 @@
 {
   "files": {
-    "main.js": "/winter/static/js/main.7ae42e21.js",
+    "main.css": "/winter/static/css/main.b0b25714.css",
+    "main.js": "/winter/static/js/main.d7d4d41c.js",
     "index.html": "/winter/index.html",
-    "main.7ae42e21.js.map": "/winter/static/js/main.7ae42e21.js.map"
+    "main.b0b25714.css.map": "/winter/static/css/main.b0b25714.css.map",
+    "main.d7d4d41c.js.map": "/winter/static/js/main.d7d4d41c.js.map"
   },
   "entrypoints": [
-    "static/js/main.7ae42e21.js"
+    "static/css/main.b0b25714.css",
+    "static/js/main.d7d4d41c.js"
   ]
 }
