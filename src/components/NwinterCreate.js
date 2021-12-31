@@ -49,7 +49,7 @@ const NwinterCreate = ({ userObj }) => {
     // console.log(reader.readAsDataURL(theFile));
     // 보안상의 문제를 위해 readAsDataURL은 바뀌어서 보이며 react처럼 생명주기가 있다.
     reader.onloadend = (finishedEvent) => {
-      console.log("FileReader", finishedEvent);
+      // console.log("FileReader", finishedEvent);
       const {
         currentTarget: { result },
       } = finishedEvent;
