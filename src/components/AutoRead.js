@@ -7,17 +7,20 @@ const AutoRead = ({ userObj }) => {
 
   // 실시간 read
   useEffect(() => {
-    dbService.collection("winter").onSnapshot(async (snapshot) => {
-      //async-await는 여기서는 안 써도 가능
-      // foreach는 매순간 반환하지만 map은 순회후 반환이라 성능 개선됨
-      const newArray = await snapshot.docs.map((document) => ({
-        // snapshot.docs로 문서 스냅샷만 얻오옴,
-        id: document.id,
-        ...document.data(),
-      }));
-      setWinters(newArray);
-      // console.log(newArray);
-    });
+    dbService
+      .collection("winter")
+      .orderBy("createAt", "desc")
+      .onSnapshot(async (snapshot) => {
+        //async-await는 여기서는 안 써도 가능
+        // foreach는 매순간 반환하지만 map은 순회후 반환이라 성능 개선됨
+        const newArray = await snapshot.docs.map((document) => ({
+          // snapshot.docs로 문서 스냅샷만 얻오옴,
+          id: document.id,
+          ...document.data(),
+        }));
+        setWinters(newArray);
+        // console.log(newArray);
+      });
   }, []);
   // console["log"]("winters", winters);
 
