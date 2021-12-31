@@ -26,10 +26,10 @@ const Container = styled.footer`
     font-size: 15px;
     margin-bottom: 10px;
   }
-  p {
+  <<<<<<< HEAD p {
     margin-bottom: 5px;
   }
-  div {
+  =======>>>>>>>64afa1acebd510f0ff767f52ddc55d7dcd46545b div {
     margin-bottom: 20px;
     a {
       color: #ff758c;
