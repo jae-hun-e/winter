@@ -1,6 +1,13 @@
 import React from "react";
 import { firebaseInstance, authService } from "fbase";
 import AuthForm from "components/AuthForm";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faTwitter,
+  faGoogle,
+  faGithub,
+} from "@fortawesome/free-brands-svg-icons";
+import styled from "styled-components";
 
 // todo 소셜로그인
 const Auth = () => {
@@ -19,14 +26,22 @@ const Auth = () => {
     // console.log(data);
   };
   return (
-    <div>
+    <div className="authContainer">
+      <FontAwesomeIcon
+        icon={faTwitter}
+        color={"#04AAFF"}
+        size="3x"
+        style={{ marginBottom: 30 }}
+      />
       <AuthForm />
-      <div>
-        <button onClick={onSocialClick} name="google">
-          Continue with Google
+      <div className="authBtns">
+        <button onClick={onSocialClick} name="google" className="authBtn">
+          <P>Google로 로그인</P>
+          <FontAwesomeIcon icon={faGoogle} />
         </button>
-        <button onClick={onSocialClick} name="github">
-          Continue with GitHub
+        <button onClick={onSocialClick} name="github" className="authBtn">
+          <P>GitHub로 로그인</P>
+          <FontAwesomeIcon icon={faGithub} />
         </button>
       </div>
     </div>
@@ -34,3 +49,8 @@ const Auth = () => {
 };
 
 export default Auth;
+
+const P = styled.p`
+  margin-right: 5px;
+  color: black;
+`;
