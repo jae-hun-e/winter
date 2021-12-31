@@ -25,25 +25,13 @@ const Home = ({ userObj }) => {
     // nweetObj 생성
     await dbService.collection("nweets").add({
       text: nweet,
-      createAt: Date.now(),
+      createdAt: Date.now(),
       creatorId: userObj.uid,
       attachmentUrl,
     });
     setNweet(""); // 초기화
+    setAttachment("");
   };
-
-  // // read
-  // const getNweets = async () => {
-  // firbasestore의 스냅샷
-  //   const dbNweets = await dbService.collection("nweets").get();
-  //   // console.log(dbNweets);
-  //   dbNweets.forEach((document) => {
-  // 문서 내용과 문서 id담은 객체
-  //     const nweetObject = { ...document.data(), id: document.id };
-  //? 왜 뒤에 넣었는데 맨 앞으로 들어감?
-  //     setNweets((prev) => [...prev, nweetObject]);
-  //   }); // 모든 필드값 가져오기
-  // };
 
   // 실시간 read
   useEffect(() => {
@@ -70,14 +58,16 @@ const Home = ({ userObj }) => {
   };
 
   const onFileChange = (event) => {
+    // console.log(event.target.files);
     const {
       target: { files },
     } = event;
     const theFile = files[0];
     const reader = new FileReader(); // 브라우저API 함수
+    // console.log(reader.readAsDataURL(theFile));
     // 보안상의 문제를 위해 readAsDataURL은 바뀌어서 보이며 react처럼 생명주기가 있다.
     reader.onloadend = (finishedEvent) => {
-      console.log(finishedEvent);
+      console.log("FileReader", finishedEvent);
       const {
         currentTarget: { result },
       } = finishedEvent;
@@ -88,6 +78,7 @@ const Home = ({ userObj }) => {
 
   const onClearAttachment = () => setAttachment("");
 
+  // todo 트윗 오름차순 정렬 필요
   return (
     <>
       <form onSubmit={onSubmit}>

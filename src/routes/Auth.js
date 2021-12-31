@@ -58,6 +58,7 @@ const Auth = () => {
     const data = await authService.signInWithPopup(provider);
     console.log(data);
   };
+  // todo 회원가입시 user.displayName이랑 image기입하도록
   return (
     <div>
       <form onSubmit={onSubmit}>
