@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import AppRouter from "components/Router";
 import { authService } from "fbase";
-import Footer from "./Footer";
+import Footer from "components/Footer";
 import styled from "styled-components";
 
 function App() {
