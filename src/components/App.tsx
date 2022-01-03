@@ -1,14 +1,22 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import AppRouter from "components/Router";
 import { authService } from "fbase";
 import Footer from "components/Footer";
 import styled from "styled-components";
 
+export interface UserObjType {
+  uid: string;
+  displayName: string;
+  updateProfile: Function;
+}
+
 function App() {
   const [init, setInit] = useState(false);
   // todo contextAPI로 변경하기
-  const [userObj, setUserObj] = useState(null);
+  const [userObj, setUserObj] = useState<UserObjType>(null);
+  const [userCheck, setUserCheck] = useState(true);
 
+  // todo args 타입 확인하기...
   // 초기 렌더링
   useEffect(() => {
     authService.onAuthStateChanged((user) => {
@@ -18,10 +26,10 @@ function App() {
         setUserObj({
           uid: user.uid,
           displayName: user.displayName,
-          updateProfile: (args) => user.updateProfile(args),
+          updateProfile: (args: any) => user.updateProfile(args),
         });
       } else {
-        setUserObj(false);
+        setUserCheck(false);
       }
       setInit(true);
     });
@@ -33,7 +41,7 @@ function App() {
     setUserObj({
       uid: user.uid,
       displayName: user.displayName,
-      updateProfile: (args) => user.updateProfile(args),
+      updateProfile: (args: any) => user.updateProfile(args),
     });
   };
 
@@ -42,11 +50,11 @@ function App() {
       {init ? (
         <AppRouter
           refreshUser={refreshUser}
-          isLoggedIn={Boolean(userObj)}
+          isLoggedIn={Boolean(userCheck)}
           userObj={userObj}
         />
       ) : (
-        <span></span>
+        <span>로딩중,,,</span>
       )}
       <Footer />
     </Container>

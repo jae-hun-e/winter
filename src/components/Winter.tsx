@@ -1,8 +1,14 @@
 import { useState } from "react";
 import WinterDelete from "./WinterDelete";
 import WinterEditing from "./WinterEditing";
+import { UserObjType } from "components/App";
 
-const Winter = ({ winterObj, isOwner }) => {
+// todo winterObj 타입 설정
+interface WinterProps {
+  winterObj: any;
+  isOwner: Boolean;
+}
+const Winter = ({ winterObj, isOwner }: WinterProps) => {
   const [editing, setEditing] = useState(false);
 
   const toggleEditing = () => setEditing((prev) => !prev);

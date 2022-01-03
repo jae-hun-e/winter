@@ -5,6 +5,7 @@
   "compilerOptions": {
     "allowJs": true, // js 파일들 ts에서 import해서 쓸 수 있는지
     "module": "none", //무슨 import 문법 쓸건지 'commonjs', 'amd', 'es2015', 'esnext'
+    "moduleResolution": "node",
     "target": "ES6", // 'es3', 'es5', 'es2015', 'es2016', 'es2017','es2018', 'esnext' 가능
     "jsx": "preserve", // tsx 파일을 jsx로 어떻게 컴파일할 것인지 'preserve', 'react-native', 'react'
     "declaration": true, //컴파일시 .d.ts 파일도 자동으로 함께생성 (현재쓰는 모든 타입이 정의된 파일)
@@ -17,7 +18,7 @@
 
     "noImplicitAny": true, //any타입 금지 여부
 
-    "baseUrl": "src", //절대경로 설정
+    "baseUrl": "src", // 절대경로 설정
 
     // "noUnusedLocals": true, //쓰지않는 지역변수, import값 있으면 에러내기
     "noUnusedParameters": true, //쓰지않는 파라미터 있으면 에러내기

@@ -1,8 +1,13 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { dbService } from "fbase";
 import Winter from "components/Winter";
+import { UserObjType } from "components/App";
 
-const AutoRead = ({ userObj }) => {
+interface AutoRead {
+  userObj: UserObjType;
+}
+
+const AutoRead = ({ userObj }: AutoRead) => {
   const [winters, setWinters] = useState([]); // 트윗 리스트
 
   // 실시간 read

@@ -1,8 +1,11 @@
-import React from "react";
 import NwinterCreate from "components/NwinterCreate";
 import AutoRead from "components/AutoRead";
+import { UserObjType } from "components/App";
 
-const Home = ({ userObj }) => {
+interface HomeProps {
+  userObj: UserObjType;
+}
+const Home = ({ userObj }: HomeProps) => {
   return (
     <div className="container">
       <NwinterCreate userObj={userObj} />

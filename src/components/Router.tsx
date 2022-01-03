@@ -1,4 +1,3 @@
-import React from "react";
 import {
   HashRouter as Router,
   Navigate,
@@ -10,6 +9,7 @@ import Home from "routes/Home";
 import Navigation from "components/Navigation";
 import Profile from "routes/Profile";
 import styled from "styled-components";
+import { UserObjType } from "components/App";
 
 const Container = styled.div`
   max-width: 890px;
@@ -20,7 +20,13 @@ const Container = styled.div`
   justify-content: center;
 `;
 
-const AppRouter = ({ refreshUser, isLoggedIn, userObj }) => {
+interface AppRouterProps {
+  refreshUser: () => void;
+  isLoggedIn: Boolean;
+  userObj: UserObjType;
+}
+
+function AppRouter({ refreshUser, isLoggedIn, userObj }: AppRouterProps) {
   return (
     <Router>
       {isLoggedIn && (
@@ -49,6 +55,6 @@ const AppRouter = ({ refreshUser, isLoggedIn, userObj }) => {
       </Container>
     </Router>
   );
-};
+}
 
 export default AppRouter;

@@ -1,15 +1,20 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { dbService, storageService } from "fbase";
 import { v4 as uuidv4 } from "uuid";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faTimes } from "@fortawesome/free-solid-svg-icons";
+import { UserObjType } from "components/App";
 
-const NwinterCreate = ({ userObj }) => {
+interface NwinterCreateProps {
+  userObj: UserObjType;
+}
+
+const NwinterCreate = ({ userObj }: NwinterCreateProps) => {
   const [winter, setWinter] = useState(""); // 추가 트윗
   const [attachment, setAttachment] = useState(""); // 사진url
 
   // create
-  const onSubmit = async (event) => {
+  const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     let attachmentUrl = "";
@@ -33,24 +38,24 @@ const NwinterCreate = ({ userObj }) => {
     setAttachment("");
   };
 
-  const onChange = (event) => {
+  const onChange = (event: React.FormEvent<HTMLInputElement>) => {
     event.preventDefault();
     const {
-      target: { value },
+      currentTarget: { value },
     } = event;
     setWinter(value);
   };
 
-  const onFileChange = (event) => {
+  const onFileChange = (event: React.FormEvent<HTMLInputElement>) => {
     // console.log(event.target.files);
     const {
-      target: { files },
+      currentTarget: { files },
     } = event;
     const theFile = files[0];
     const reader = new FileReader(); // 브라우저API 함수
     // console.log(reader.readAsDataURL(theFile));
     // 보안상의 문제를 위해 readAsDataURL은 바뀌어서 보이며 react처럼 생명주기가 있다.
-    reader.onloadend = (finishedEvent) => {
+    reader.onloadend = (finishedEvent: any) => {
       // console.log("FileReader", finishedEvent);
       const {
         currentTarget: { result },
@@ -76,7 +81,7 @@ const NwinterCreate = ({ userObj }) => {
         />
         <input type="submit" value="&rarr;" className="factoryInput__arrow" />
       </div>
-      <label for="attach-file" className="factoryInput__label">
+      <label className="factoryInput__label">
         <span>Add photos</span>
         <FontAwesomeIcon icon={faPlus} />
       </label>

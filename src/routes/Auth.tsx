@@ -1,4 +1,3 @@
-import React from "react";
 import { firebaseInstance, authService } from "fbase";
 import AuthForm from "components/AuthForm";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -11,9 +10,9 @@ import styled from "styled-components";
 
 // todo 소셜로그인
 const Auth = () => {
-  const onSocialClick = async (event) => {
+  const onSocialClick = async (event: React.FormEvent<HTMLButtonElement>) => {
     const {
-      target: { name },
+      currentTarget: { name },
     } = event;
     let provider;
     if (name === "google") {

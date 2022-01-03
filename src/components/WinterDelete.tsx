@@ -1,9 +1,13 @@
-import React from "react";
 import { dbService, storageService } from "fbase";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faPencilAlt } from "@fortawesome/free-solid-svg-icons";
 
-const WinterDelete = ({ winterObj, toggleEditing }) => {
+interface WinterDelete {
+  winterObj: any;
+  toggleEditing: () => void;
+}
+
+const WinterDelete = ({ winterObj, toggleEditing }: WinterDelete) => {
   // delete
   const onDeleteClick = async () => {
     const ok = window.confirm("삭제하시겠습니까?");

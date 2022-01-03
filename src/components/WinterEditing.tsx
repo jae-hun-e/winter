@@ -1,19 +1,29 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { dbService } from "fbase";
 
-const WinterEditing = ({ winterObj, setEditing, toggleEditing }) => {
+interface WinterEditingProps {
+  winterObj: any;
+  setEditing: React.Dispatch<React.SetStateAction<boolean>>;
+  toggleEditing: () => void;
+}
+
+const WinterEditing = ({
+  winterObj,
+  setEditing,
+  toggleEditing,
+}: WinterEditingProps) => {
   const [newWinter, setNewWinter] = useState(winterObj.text);
 
   // 트윗 내용변경
-  const onChange = (event) => {
+  const onChange = (event: React.FormEvent<HTMLInputElement>) => {
     const {
-      target: { value },
+      currentTarget: { value },
     } = event;
     setNewWinter(value);
   };
 
   // 트윗 내용 제출
-  const onSubmit = async (event) => {
+  const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     // console.log(winterObj.id, newWinter);
     await dbService.doc(`winters/${winterObj.id}`).update({ text: newWinter });

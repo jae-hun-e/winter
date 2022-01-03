@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { authService } from "fbase";
 
 const AuthForm = () => {
@@ -7,10 +7,10 @@ const AuthForm = () => {
   const [newAccount, setNewAccount] = useState(true);
   const [error, setError] = useState("");
 
-  const onChange = (event) => {
+  const onChange = (event: React.FormEvent<HTMLInputElement>) => {
     // console.log(event);
     const {
-      target: { type, value },
+      currentTarget: { type, value },
     } = event;
 
     if (type === "email") {
@@ -22,7 +22,7 @@ const AuthForm = () => {
     }
   };
 
-  const onSubmit = async (event) => {
+  const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
       if (newAccount) {

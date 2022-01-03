@@ -1,10 +1,15 @@
 import { authService, dbService } from "fbase";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Winter from "components/Winter";
 import UserInfoEditing from "components/UserInfoEditing";
+import { UserObjType } from "components/App";
+interface ProfileProps {
+  refreshUser: () => void;
+  userObj: UserObjType;
+}
 
-const Profile = ({ refreshUser, userObj }) => {
+const Profile = ({ refreshUser, userObj }: ProfileProps) => {
   const [myWinters, setMyWinters] = useState([]); //내 트윗
   const navigate = useNavigate();
 
